@@ -10,16 +10,17 @@ router.get('/transactions/data', (req, res) => {
     })
     .catch((err) => res.status(500).json(err));
 });
-// GET "/api/transactions/total responds with total of all transactions
+// GET "/api/transactions/total responds with total of all transactions and append to HTML page
 router.get('/transactions/total', (req, res) => {
   transaction
     .getTransactionData()
     .then((data) => {
       const total = transaction.calculateTransactionTotals(data);
-      return res.json({total: total});
+      // const totalElement = document.createElement('h3');
+      // totalElement.textContent = `Total Transactions: $${total}`;
+      return res.json({ total: total });
     })
     .catch((err) => res.status(500).json(err));
-
 
 });
 

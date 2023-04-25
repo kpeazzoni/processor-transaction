@@ -1,4 +1,5 @@
 const fs = require('fs');
+const util = require('util');
 const xml2json = require('xml2json');
 const readFileAsync = util.promisify(fs.readFile);
 
@@ -33,7 +34,10 @@ const processors = [
 class Transactions {
   read() {
     return readFileAsync('transaction/transactions.xml', 'utf8');
-  }
+  };
+  // readVoids() {
+  //   return readFileAsync('transaction/voids.xml', 'utf8');
+  // }
 
   // convert xml to json and parsed from string to object. 
   getTransactionData() {
@@ -66,10 +70,10 @@ class Transactions {
       }
       processorFees[name] = parseFloat(total).toFixed(2);
     }
+    return processorFees;
 
-      return processorFees;
+
   }
+
 }
-
-
 module.exports = new Transactions();
